@@ -21,7 +21,12 @@ public class OcorrenciaService {
 		  return ocorrenciaRepository.findAll();
 	}
 
-	public Ocorrencia save(Ocorrencia ocorrencia) {
+	public Ocorrencia insert(Ocorrencia ocorrencia) {
+		ocorrencia.setNumeroOcorrencia(null);
+		return ocorrenciaRepository.save(ocorrencia);
+	}
+	public Ocorrencia update(Ocorrencia ocorrencia) {
+		ocorrencia.setNumeroOcorrencia(null);
 		return ocorrenciaRepository.save(ocorrencia);
 	}
 
