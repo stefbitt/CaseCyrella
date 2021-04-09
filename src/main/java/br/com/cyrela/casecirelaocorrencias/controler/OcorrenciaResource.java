@@ -2,6 +2,8 @@ package br.com.cyrela.casecirelaocorrencias.controler;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,23 +37,25 @@ public class OcorrenciaResource {
 		return ResponseEntity.ok().body(obj);
    	}
     	
-//    @ResponseStatus(HttpStatus.CREATED)
+//  @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-	public	ResponseEntity<Ocorrencia> cadastrar(@RequestBody Ocorrencia ocorrencia) {
+	public	ResponseEntity<Ocorrencia> cadastrar(@Valid @RequestBody Ocorrencia ocorrencia) {
 		Ocorrencia obj = ocorrenciaService.insert(ocorrencia);
 		java.net.URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getNumeroOcorrencia()).toUri();
 		return	ResponseEntity.created(uri).build();
 	}
-    
-    
+
      @PutMapping("{id}")
-    public Ocorrencia atualizar(@RequestBody Ocorrencia ocorrencia, @PathVariable Integer id) {
-        ocorrencia.setNumeroOcorrencia(id);
-        return ocorrenciaService.update(ocorrencia);
-    }
+     public ResponseEntity<Ocorrencia> atualizar(@Valid @RequestBody Ocorrencia ocorrencia, @PathVariable Integer id) {
+    	ocorrencia.setNumeroOcorrencia(id);
+ 		ocorrenciaService.update(ocorrencia);
+ 		return ResponseEntity.ok().body(ocorrencia);
+ 	}
+     
     @DeleteMapping("{id}")
-    public void remover(@PathVariable Integer id) {
-        ocorrenciaService.deleteById(id);
-    }
+	public	ResponseEntity<Void> deleteById(@PathVariable Integer id) {
+    	ocorrenciaService.delete(id);
+		return ResponseEntity.noContent().build();
+    }	
 }

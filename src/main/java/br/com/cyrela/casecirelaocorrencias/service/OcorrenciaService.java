@@ -1,8 +1,10 @@
 package br.com.cyrela.casecirelaocorrencias.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import br.com.cyrela.casecirelaocorrencias.entity.Ocorrencia;
 import br.com.cyrela.casecirelaocorrencias.repositori.OcorrenciaRepository;
 import br.com.cyrela.casecirelaocorrencias.service.exceptions.EntityNotFoundException;
@@ -26,11 +28,12 @@ public class OcorrenciaService {
 		return ocorrenciaRepository.save(ocorrencia);
 	}
 	public Ocorrencia update(Ocorrencia ocorrencia) {
-		ocorrencia.setNumeroOcorrencia(null);
+		findById(ocorrencia.getNumeroOcorrencia());
 		return ocorrenciaRepository.save(ocorrencia);
 	}
 
-	public void deleteById(Integer id) {
-        ocorrenciaRepository.deleteById(id); 
-	}
+	public void delete(Integer id) {
+		findById(id);
+		ocorrenciaRepository.deleteById(id);
+	}	
 }
