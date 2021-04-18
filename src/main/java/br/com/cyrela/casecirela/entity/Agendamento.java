@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
@@ -18,16 +17,17 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "T_PJO_AGENDAMENTO")
-@SequenceGenerator(name="agendamento",sequenceName="sq_t_agendamento",allocationSize=1)
-public class Agendamento implements Serializable{
+//@SequenceGenerator(name="agendamento",sequenceName="sq_t_agendamento",allocationSize=1)
+public class Agendamento implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "agendamento")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "nr_agendamento")
 	private Long numeroAgendamento;
 	
-	@NotNull 
-	@NotBlank
+	@NotNull
 	@Future
 	@Column(name = "actual_start")
 	private LocalDate actualStart;

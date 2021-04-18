@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "20ba831e-76a2-4fab-b27d-2adb9430d786",
+		"name": "CaseCirela/agendamento",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Criar agendamento",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"actualStart\": \"2021-04-19\",\r\n    \"pjoTipoAtividade\": \"pjoTipoAtividade\",\r\n    \"subject\": \"subject\",\r\n    \"empreendimento\": {\r\n        \"numeroEmpreendimento\": 1\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/cirela/agendamento/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"cirela",
+						"agendamento",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obter todos os agendamentos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/cirela/agendamento/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"cirela",
+						"agendamento",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obter agendamento por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/cirela/agendamento/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"cirela",
+						"agendamento",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obter agendamentos por empreendimento",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/cirela/agendamento?empreendimento=Vivaz Granja",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"cirela",
+						"agendamento"
+					],
+					"query": [
+						{
+							"key": "empreendimento",
+							"value": "Vivaz Granja"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar agendamento",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"actualStart\": \"2021-04-19\",\r\n    \"actualEnd\": \"2021-04-20\",\r\n    \"pjoTipoAtividade\": \"pjoTipoAtividade\",\r\n    \"subject\": \"subject\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/cirela/agendamento/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"cirela",
+						"agendamento",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar agendamento por id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/cirela/agendamento/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"cirela",
+						"agendamento",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletar todos os agendamentos",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/cirela/agendamento",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"cirela",
+						"agendamento"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
