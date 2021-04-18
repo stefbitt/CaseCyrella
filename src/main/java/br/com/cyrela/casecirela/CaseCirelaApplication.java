@@ -8,12 +8,17 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.cyrela.casecirela.entity.Ocorrencia;
+import br.com.cyrela.casecirela.entity.PjoEmpreendimento;
+import br.com.cyrela.casecirela.repository.EmpreendimentoRepository;
 import br.com.cyrela.casecirela.repository.OcorrenciaRepository;
 
 @SpringBootApplication
 public class CaseCirelaApplication implements CommandLineRunner{
 	@Autowired
 	private	OcorrenciaRepository ocorrenciaRepository;
+	
+	@Autowired
+	private EmpreendimentoRepository empreendimentoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CaseCirelaApplication.class, args);
@@ -27,8 +32,11 @@ public class CaseCirelaApplication implements CommandLineRunner{
 		Ocorrencia o4 = new Ocorrencia(4,350,1,"C","850","Vivaz","Não sai agua na pia");
 		Ocorrencia o5 = new Ocorrencia(5,650,1,"A","250","Vivaz","Gabinete da pia quebrado");
 		
+		PjoEmpreendimento emp1 = new PjoEmpreendimento(1, "Vivaz Granja Julieta", "A", 56);
+		
    
 		ocorrenciaRepository.saveAll(Arrays.asList(o1,o2,o3,o4,o5));
+		empreendimentoRepository.save(emp1);
 	}
 
 }

@@ -27,7 +27,7 @@ public class PjoEmpreendimento  implements Serializable{
 	@NotBlank
 	@Size(max = 30)
 	@Column(name = "pjo_empreendimento")
-	private String empreendimento;
+	private String nome;
 	
 	
 	@NotNull 
@@ -37,9 +37,12 @@ public class PjoEmpreendimento  implements Serializable{
 	private String bloco;
 	
 	@NotNull 
-	@NotBlank
 	@Column(name = "pjo_unidade")
 	private Integer unidade;
+	
+	public PjoEmpreendimento() {
+		
+	}
 
 	public PjoEmpreendimento(Integer numeroEmpreendimento,
 			@NotNull @Size(max = 30) String empreendimento,
@@ -47,7 +50,7 @@ public class PjoEmpreendimento  implements Serializable{
 			@NotNull Integer unidade){
 		super();
 		this.numeroEmpreendimento = numeroEmpreendimento;
-		this.empreendimento = empreendimento;
+		this.nome = empreendimento;
 		this.bloco = bloco;
 		this.unidade = unidade;
 	}
@@ -55,19 +58,13 @@ public class PjoEmpreendimento  implements Serializable{
 	
 	
 
-	public String getEmpreendimento() {
-		return empreendimento;
+	public String getNome() {
+		return nome;
 	}
 
-
-
-
-	public void setEmpreendimento(String empreendimento) {
-		this.empreendimento = empreendimento;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-
-
-
 
 	public Integer getNumeroEmpreendimento() {
 		return numeroEmpreendimento;

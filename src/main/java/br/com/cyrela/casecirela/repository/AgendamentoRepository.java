@@ -8,7 +8,8 @@ import br.com.cyrela.casecirela.entity.*;
 
 @Repository
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> {
-	  List<Agendamento> findByEmpreendimentoContaining(String empreendimento);
+	
+	  List<Agendamento> findByEmpreendimentoNomeContainingIgnoreCase(String empreendimento);
 
 
 }

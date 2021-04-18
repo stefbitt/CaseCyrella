@@ -21,7 +21,7 @@ import br.com.cyrela.casecirela.repository.AgendamentoRepository;
 import br.com.cyrela.casecirela.entity.*;
 
 @RestController
-@RequestMapping("/cirela/agendamento/")
+@RequestMapping("/cirela/agendamento")
 public class AgendamentoResource {
 	@Autowired
 	private AgendamentoRepository agendamentoRepository;
@@ -34,7 +34,7 @@ public class AgendamentoResource {
 			if (empreendimento == null)
 				agendamentoRepository.findAll().forEach(agendamento::add);
 			else
-				agendamentoRepository.findByEmpreendimentoContaining(empreendimento).forEach(agendamento::add);
+				agendamentoRepository.findByEmpreendimentoNomeContainingIgnoreCase(empreendimento).forEach(agendamento::add);
 
 			if (agendamento.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -42,6 +42,7 @@ public class AgendamentoResource {
 
 			return new ResponseEntity<>(agendamento, HttpStatus.OK);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -60,9 +61,10 @@ public class AgendamentoResource {
 	@PostMapping
 	public ResponseEntity<Agendamento> createAgendamento(@RequestBody Agendamento agendamentoRequest) {
 		try {
-			Agendamento agendamento = agendamentoRepository.save(new Agendamento());
+			Agendamento agendamento = agendamentoRepository.save(agendamentoRequest);
 			return new ResponseEntity<>(agendamento, HttpStatus.CREATED);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -74,24 +76,15 @@ public class AgendamentoResource {
 
 		if (agendamento1.isPresent()) {
 			Agendamento _agendamento = agendamento1.get();
-			PjoEmpreendimento empreendimento = _agendamento.getEmpreendimento();
-			loadEmpreendimento(empreendimento, agendamentoRequest.getEmpreendimento());
 
 			_agendamento.setActualEnd(agendamentoRequest.getActualEnd());
 			_agendamento.setActualStart(agendamentoRequest.getActualStart());
-			_agendamento.setEmpreendimento(empreendimento);
 			_agendamento.setPjoTipoAtividade(agendamentoRequest.getPjoTipoAtividade());
 			_agendamento.setSubject(agendamentoRequest.getSubject());
 			return new ResponseEntity<>(agendamentoRepository.save(_agendamento), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-	}
-
-	public void loadEmpreendimento(PjoEmpreendimento empreendimento, PjoEmpreendimento empreendimentoRequest) {
-		 empreendimento.setBloco(empreendimentoRequest.getBloco());
-		 empreendimento.setUnidade(empreendimentoRequest.getUnidade());
-
 	}
 	
 	 @DeleteMapping("/{numeroAgendamento}")
